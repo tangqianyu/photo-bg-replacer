@@ -46,7 +46,8 @@
 
     <ng-container *ngIf="current === 2">
       <div class="text-center mb-3">
-        <img *ngIf="currentService ==='removebg'" style="width: 200px;height: auto;" [src]="imageUrl" alt="">
+        <img *ngIf="currentService ==='removebg' || currentService ==='photoroom' " style="width: 200px;height: auto;"
+          [src]="imageUrl" alt="">
 
         <ng-container *ngIf="currentService ==='rapidapi'">
           <nz-spin nzTip="加载中..." [nzSpinning]="imageLoading">
@@ -68,8 +69,8 @@
       <button nz-button [nzLoading]="loading" nzType="primary" (click)="next()" *ngIf="current === 1">
         <span>下一步</span>
       </button>
-      <button [disabled]="imageLoading" [nzLoading]="downloadLoading" (click)="downloadImage()" class="mr-4" nz-button nzType="primary"
-        *ngIf="current === 2">
+      <button [disabled]="imageLoading" [nzLoading]="downloadLoading" (click)="downloadImage()" class="mr-4" nz-button
+        nzType="primary" *ngIf="current === 2">
         <span>下载图片</span>
       </button>
       <button (click)="reset()" nz-button nzType="dashed" nzDanger="" *ngIf="current === 2">

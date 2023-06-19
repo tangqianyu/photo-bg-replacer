@@ -50,3 +50,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+#config
+src/app/app.setting.ts
