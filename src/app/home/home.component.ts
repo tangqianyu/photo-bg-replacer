@@ -7,10 +7,12 @@ import { Observable, Observer } from 'rxjs';
 // import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ElectronService } from '../core/services';
 import { arrayBufferToJson } from '../shared/utils/common';
-import {RAPID_API_KEY, REMOVE_BG_API_KEY} from '../app.setting';
+import { PHOTO_ROOM_API_KEY, RAPID_API_KEY, REMOVE_BG_API_KEY } from '../app.setting';
+
+type serviceType = 'removebg' | 'rapidapi' | 'photoroom';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +33,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   downloadLoading = false;
   imageLoading = false;
   color: string = '#F00';
-  currentService: 'removebg' | 'rapidapi' = 'removebg';
+  currentService: serviceType = 'removebg';
   serviceLsit = [
     {
       label: 'Remove.bg',
@@ -40,6 +42,10 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     {
       label: 'Rapid API',
       value: 'rapidapi'
+    },
+    {
+      label: 'Photo Room',
+      value: 'photoroom'
     }
   ];
 
@@ -90,6 +96,8 @@ export class HomeComponent implements OnInit, AfterViewChecked {
         this.fetchRemoveBgApi();
       } else if (this.currentService === 'rapidapi') {
         this.fetchRapidAPI();
+      } else if (this.currentService === 'photoroom') {
+        this.fetchPhotoRoomApi();
       }
 
       return;
@@ -169,6 +177,33 @@ export class HomeComponent implements OnInit, AfterViewChecked {
               this.imageLoading = false;
             });
           });
+        },
+        error => {
+          console.log(error);
+          this.loading = false;
+        }
+      );
+  }
+
+  fetchPhotoRoomApi() {
+    this.loading = true;
+    const formData = new FormData();
+    formData.append('image_file', this.file as Blob);
+    formData.append('bg_color', this.color);
+    this.http
+      .post('https://sdk.photoroom.com/v1/segment', formData, {
+        headers: {
+          'x-api-key': PHOTO_ROOM_API_KEY
+        },
+        responseType: 'arraybuffer'
+      })
+      .subscribe(
+        res => {
+          console.log('res==', res);
+          this.loading = false;
+          this.imageBuffer = res;
+          this.imageUrl = URL.createObjectURL(this.getBlob(res));
+          this.current++;
         },
         error => {
           console.log(error);
