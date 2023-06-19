@@ -1,0 +1,13 @@
+{
+  "name": "photo-bg-replacer",
+  "description": "A simple app for change photo background",
+  "author": {
+    "name": "Maxime GRIS",
+    "email": "maxime.gris@gmail.com"
+  },
+  "version": "1.0.0",
+  "main": "main.js",
+  "private": true,
+  "dependencies": {
+  }
+}
