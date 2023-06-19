@@ -30,4 +30,10 @@ npm run electron:build
 ```
 
 
+## 获取相关服务
 
+1. RemoveBg: https://www.remove.bg
+
+2. RapidApi: https://rapidapi.com/objectcut.api/api/background-removal/
+
+3. PhotoRoom: https://www.photoroom.com/api/docs
