@@ -4,6 +4,9 @@
 
 ![image](https://github.com/tangqianyu/photo-bg-replacer/assets/46307662/aced1ea3-8fa6-44bb-bc14-d0c708770df2)
 
+![image](https://github.com/tangqianyu/photo-bg-replacer/assets/46307662/29c5a99f-c74c-425e-bbc8-b7a60903bc4f)
+
+
 
 ## 使用
 
